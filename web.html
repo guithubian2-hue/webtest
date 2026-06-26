@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rocket Animation</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    background:linear-gradient(#6dc5ff,#02152f);
+    height:100vh;
+}
+
+/* Stars */
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:blink 2s infinite alternate;
+}
+
+@keyframes blink{
+    from{opacity:.2;}
+    to{opacity:1;}
+}
+
+/* Moon */
+
+.moon{
+    position:absolute;
+    top:70px;
+    right:120px;
+    width:90px;
+    height:90px;
+    background:#f4f4f4;
+    border-radius:50%;
+    box-shadow:0 0 30px white;
+}
+
+/* Earth */
+
+.earth{
+    position:absolute;
+    bottom:-250px;
+    left:50%;
+    transform:translateX(-50%);
+    width:700px;
+    height:500px;
+    background:#1aa84c;
+    border-radius:50%;
+    box-shadow:0 -10px 80px rgba(255,255,255,.4);
+}
+
+/* Clouds */
+
+.cloud{
+    position:absolute;
+    width:180px;
+    height:60px;
+    background:white;
+    border-radius:50px;
+    opacity:.7;
+    animation:cloudMove 18s linear infinite;
+}
+
+.cloud:before,
+.cloud:after{
+    content:"";
+    position:absolute;
+    background:white;
+    border-radius:50%;
+}
+
+.cloud:before{
+    width:70px;
+    height:70px;
+    left:20px;
+    top:-30px;
+}
+
+.cloud:after{
+    width:90px;
+    height:90px;
+    right:20px;
+    top:-45px;
+}
+
+@keyframes cloudMove{
+    from{
+        transform:translateX(-250px);
+    }
+    to{
+        transform:translateX(calc(100vw + 300px));
+    }
+}
+
+/* Rocket */
+
+.rocket{
+    position:absolute;
+    bottom:100px;
+    left:50%;
+    transform:translateX(-50%);
+    animation:
+    shake .08s infinite,
+    launch 12s linear forwards;
+}
+
+/* Rocket body */
+
+.body{
+    width:70px;
+    height:170px;
+    background:#ddd;
+    border-radius:35px;
+    position:relative;
+}
+
+.nose{
+    position:absolute;
+    top:-40px;
+    left:0;
+    width:0;
+    height:0;
+    border-left:35px solid transparent;
+    border-right:35px solid transparent;
+    border-bottom:40px solid red;
+}
+
+.window{
+    position:absolute;
+    width:32px;
+    height:32px;
+    background:#66d9ff;
+    border:4px solid white;
+    border-radius:50%;
+    top:35px;
+    left:19px;
+}
+
+.finL{
+    position:absolute;
+    width:25px;
+    height:60px;
+    background:red;
+    bottom:10px;
+    left:-20px;
+    border-radius:0 0 0 20px;
+}
+
+.finR{
+    position:absolute;
+    width:25px;
+    height:60px;
+    background:red;
+    bottom:10px;
+    right:-20px;
+    border-radius:0 0 20px 0;
+}
+
+/* Fire */
+
+.fire{
+    position:absolute;
+    width:30px;
+    height:80px;
+    left:20px;
+    bottom:-75px;
+    background:linear-gradient(yellow,orange,red);
+    border-radius:50%;
+    animation:fire .15s infinite;
+    filter:blur(1px);
+}
+
+@keyframes fire{
+
+0%{
+height:70px;
+}
+
+50%{
+height:95px;
+}
+
+100%{
+height:75px;
+}
+
+}
+
+@keyframes shake{
+0%{transform:translateX(-50%) translate(1px,0);}
+50%{transform:translateX(-50%) translate(-1px,0);}
+100%{transform:translateX(-50%) translate(1px,0);}
+}
+
+@keyframes launch{
+0%{
+bottom:100px;
+}
+100%{
+bottom:120%;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="moon"></div>
+
+<div class="earth"></div>
+
+<div class="cloud" style="top:120px; animation-delay:0s;"></div>
+<div class="cloud" style="top:250px; animation-delay:5s;"></div>
+<div class="cloud" style="top:350px; animation-delay:10s;"></div>
+
+<div class="rocket">
+
+<div class="body">
+<div class="nose"></div>
+<div class="window"></div>
+<div class="finL"></div>
+<div class="finR"></div>
+<div class="fire"></div>
+</div>
+
+</div>
+
+<script>
+
+// Stars
+
+for(let i=0;i<200;i++){
+
+let star=document.createElement("div");
+
+star.className="star";
+
+star.style.left=Math.random()*100+"vw";
+
+star.style.top=Math.random()*100+"vh";
+
+star.style.animationDelay=Math.random()*3+"s";
+
+star.style.opacity=Math.random();
+
+document.body.appendChild(star);
+
+}
+
+</script>
+
+</body>
+</html>
